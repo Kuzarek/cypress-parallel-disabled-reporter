@@ -1,11 +1,11 @@
 {
-  "name": "cypress-parallel",
-  "version": "0.13.0",
-  "description": "Reduce up to 40% your Cypress suite execution time parallelizing the test run on the same machine.",
+  "name": "cypress-parallel-disabled-reporter",
+  "version": "0.13.1",
+  "description": "Fork of https://github.com/tnicola/cypress-parallel.git, Reduce up to 40% your Cypress suite execution time parallelizing the test run on the same machine.",
   "main": "cli.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tnicola/cypress-parallel.git"
+    "url": "git+https://github.com/Kuzarek/cypress-parallel-disabled-reporter"
   },
   "keywords": [
     "cypress",
@@ -16,9 +16,9 @@
   "author": "Nicola Tommasi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tnicola/cypress-parallel/issues"
+    "url": "https://github.com/Kuzarek/cypress-parallel-disabled-reporter/issues"
   },
-  "homepage": "https://github.com/tnicola/cypress-parallel#readme",
+  "homepage": "https://github.com/Kuzarek/cypress-parallel-disabled-reporter#readme",
   "bin": {
     "cypress-parallel": "./cli.js"
   },
