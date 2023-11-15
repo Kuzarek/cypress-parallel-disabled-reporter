@@ -4,7 +4,7 @@
 
 Fork of cypress-parallel:
 - Allows to disable included reporter when using mochawesome report generator, multi reporter and mochawesome-merge.
-- Adds spliting tests by text included in test file (grep tag, name...)
+- Adds spliting tests by text included in test file `-S=@test,@second` (grep tag, name...)
 
 Reduce up to 40% your Cypress suite execution time parallelizing the test run on the same machine.
 

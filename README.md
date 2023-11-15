@@ -2,7 +2,9 @@
 
 # cypress-parallel
 
-Small fork of cypress-parallel, allows to disable included reporter. To be used with mochawesome report generator and mochawesome-merge.
+Fork of cypress-parallel:
+- Allows to disable included reporter when using mochawesome report generator, multi reporter and mochawesome-merge.
+- Adds spliting tests by text included in test file `-S=@test,@second` (grep tag, name...)
 
 Reduce up to 40% your Cypress suite execution time parallelizing the test run on the same machine.
 
@@ -87,6 +89,7 @@ npx cy:parallel -s cy:run -t 2 -d '<your-cypress-specs-folder>' -a '"<your-cypre
 | --bail            | -b    | Exit on first failing thread       | string |
 | --verbose         | -v    | Some additional logging            | string |
 | --strictMode      | -m    | Add stricter checks after running the tests           | boolean |
+| --splitByText      | -S    | Split test by text included in the file           | string[] |
 
 **NB**: If you use *cypress-cucumber-preprocesor*, please **disable** the *strictMode* to avoid possible errors:
 
