@@ -2,6 +2,10 @@
 
 # cypress-parallel
 
+Fork of cypress-parallel:
+- Allows to disable included reporter when using mochawesome report generator, multi reporter and mochawesome-merge.
+- Adds spliting tests by text included in test file (grep tag, name...)
+
 Reduce up to 40% your Cypress suite execution time parallelizing the test run on the same machine.
 
 |                                                          cypress                                                          |                                                      cypress-parallel                                                       |
@@ -23,13 +27,13 @@ Reduce up to 40% your Cypress suite execution time parallelizing the test run on
 ## Install
 
 ```
-npm i cypress-parallel
+npm i cypress-parallel -D
 ```
 
 or
 
 ```
-yarn add cypress-parallel
+yarn add cypress-parallel -D
 ```
 
 ## Add a new script
@@ -40,7 +44,7 @@ In your `package.json` add a new script:
 "scripts" :{
   ...
   "cy:run": "cypress run", // It can be any cypress command with any argument
-  "cy:parallel" : "cypress-parallel -s cy:run -t 2 -d <your-cypress-specs-folder> -a '\"<your-cypress-cmd-args>\"'"
+  "cy:parallel" : "cypress-parallel -s cy:run -t 2 -d '<your-cypress-specs-folder>' -a '\"<your-cypress-cmd-args>\"'"
   ...
 }
 ```
@@ -64,7 +68,7 @@ or
 Run with npx (no package installation needed)
 
 ```
-npx cy:parallel -s cy:run -t 2 -d <your-cypress-specs-folder> -a '\"<your-cypress-cmd-args>\"'
+npx cy:parallel -s cy:run -t 2 -d '<your-cypress-specs-folder>' -a '"<your-cypress-cmd-args>"'
 ```
 
 ### Scripts options
@@ -81,9 +85,11 @@ npx cy:parallel -s cy:run -t 2 -d <your-cypress-specs-folder> -a '\"<your-cypres
 | --reporter        | -r    | Reporter to pass to Cypress.       | string |
 | --reporterOptions | -o    | Reporter options                   | string |
 | --reporterModulePath | -n    | Specify the reporter module path   | string |
+| --disableParallelReporter | -f    | Disable included reporter | boolean |
 | --bail            | -b    | Exit on first failing thread       | string |
 | --verbose         | -v    | Some additional logging            | string |
 | --strictMode      | -m    | Add stricter checks after running the tests           | boolean |
+| --splitByText      | -S    | Split test by text included in the file           | string[] |
 
 **NB**: If you use *cypress-cucumber-preprocesor*, please **disable** the *strictMode* to avoid possible errors:
 
@@ -105,10 +111,41 @@ npx cy:parallel -s cy:run -t 2 -d <your-cypress-specs-folder> -a '\"<your-cypres
 }
 ```
 
+**NB**: If you disbaled included reporter, then use following config and actions after getting results in json from mochawesome reporter.
+
+```typescript
+ reporterOptions: {
+  ...
+  saveJson: true
+  saveHtml: false
+  ...
+}
+```
+
+```typescript
+"scripts" :{
+  ...
+  "cy:merge-json": "mocahwsome-merge <jsonsPath/*.json> -o <output>"
+  "cy:generate-html": "marge <jsonPath> -o=<outputHTMLPath> -i" 
+  ...
+}
+```
+
+## Env variables
+
+### CYPRESS_THREAD
+
+You can get the current thread index by reading the `CYPRESS_THREAD` variable.
+
+```javascript
+ const threadIndex = process.env.CYPRESS_THREAD;
+ // return 1, 2, 3, 4, ...
+```
+
 # Contributors
 
 Looking for contributors.
 
 # License
 
-MIT
+This project is licensed under the MIT license. See [LICENSE](LICENSE).
