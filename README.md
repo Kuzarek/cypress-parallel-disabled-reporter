@@ -2,6 +2,8 @@
 
 # cypress-parallel
 
+Small fork of cypress-parallel, allows to disable included reporter. To be used with mochawesome report generator and mochawesome-merge.
+
 Reduce up to 40% your Cypress suite execution time parallelizing the test run on the same machine.
 
 |                                                          cypress                                                          |                                                      cypress-parallel                                                       |
@@ -81,6 +83,7 @@ npx cy:parallel -s cy:run -t 2 -d '<your-cypress-specs-folder>' -a '"<your-cypre
 | --reporter        | -r    | Reporter to pass to Cypress.       | string |
 | --reporterOptions | -o    | Reporter options                   | string |
 | --reporterModulePath | -n    | Specify the reporter module path   | string |
+| --disableParallelReporter | -f    | Disable included reporter | boolean |
 | --bail            | -b    | Exit on first failing thread       | string |
 | --verbose         | -v    | Some additional logging            | string |
 | --strictMode      | -m    | Add stricter checks after running the tests           | boolean |
@@ -101,6 +104,26 @@ npx cy:parallel -s cy:run -t 2 -d '<your-cypress-specs-folder>' -a '"<your-cypre
 "scripts" :{
   ...
   "cy:parallel" : "cypress-parallel -s cy:run -t 4 -n .../../../node_modules/cypress-multi-reporters"
+  ...
+}
+```
+
+**NB**: If you disbaled included reporter, then use following config and actions after getting results in json from mochawesome reporter.
+
+```typescript
+ reporterOptions: {
+  ...
+  saveJson: true
+  saveHtml: false
+  ...
+}
+```
+
+```typescript
+"scripts" :{
+  ...
+  "cy:merge-json": "mocahwsome-merge <jsonsPath/*.json> -o <output>"
+  "cy:generate-html": "marge <jsonPath> -o=<outputHTMLPath> -i" 
   ...
 }
 ```
