@@ -1,6 +1,6 @@
 {
-  "name": "cypress-parallel-disabled-reporter",
-  "version": "0.2.1",
+  "name": "cypress-parallel-extended-filtering",
+  "version": "0.3.0",
   "description": "Fork of https://github.com/tnicola/cypress-parallel.git, Reduce up to 40% your Cypress suite execution time parallelizing the test run on the same machine.",
   "main": "cli.js",
   "repository": {
